@@ -62,12 +62,26 @@ fun Greeting(name: String) {
 }
 
 @Composable
-private fun MyApp(names: List<String> = listOf("World", "Compose")) {
+private fun Greetings(names: List<String> = listOf("World", "Compose")) {
     Column(modifier = Modifier.padding(vertical = 4.dp)) {
         for (name in names) {
             Greeting(name = name)
         }
     }
+}
+
+@Composable
+fun MyApp() {
+    var shouldShowOnBoarding by remember { mutableStateOf(true) }
+
+    if (shouldShowOnBoarding) {
+        OnBoardingScreen {
+            shouldShowOnBoarding = false
+        }
+    } else {
+        Greetings()
+    }
+    Greetings()
 }
 
 @Preview(showBackground = true, widthDp = 320)
@@ -80,8 +94,8 @@ fun DefaultPreview() {
 }
 
 @Composable
-fun OnBoardingScreen() {
-    var shouldShowOnboarding by remember { mutableStateOf(true) }
+fun OnBoardingScreen(onContinueClicked: () -> Unit) {
+
 
     Surface {
         Column(
@@ -91,7 +105,7 @@ fun OnBoardingScreen() {
         ) {
             Text(text = "Welcome to the Basics Codelab!")
             Button(
-                onClick = { shouldShowOnboarding = false },
+                onClick = { onContinueClicked },
                 modifier = Modifier.padding(vertical = 24.dp)
             ) {
                 Text(text = "Continue")
@@ -101,10 +115,10 @@ fun OnBoardingScreen() {
     }
 }
 
-@Preview(showBackground = true,widthDp = 320,heightDp = 320)
+@Preview(showBackground = true, widthDp = 320, heightDp = 320)
 @Composable
-fun OnBoardingPreview(){
-        ComposeLabTheme{
-            OnBoardingScreen()
-        }
+fun OnBoardingPreview() {
+    ComposeLabTheme {
+        OnBoardingScreen(onContinueClicked = {})
+    }
 }
