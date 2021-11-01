@@ -30,8 +30,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Surface(color = MaterialTheme.colors.primary,modifier = Modifier.padding(5.dp)) {
-        Column(modifier = Modifier.padding(24.dp).fillMaxWidth(1.0f)) {
+    Surface(color = MaterialTheme.colors.primary,modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)) {
+        Column(modifier = Modifier.padding(24.dp).fillMaxWidth()) {
 
             Text(text = "Hello, ")
             Text(text = name)
@@ -43,7 +43,7 @@ fun Greeting(name: String) {
 
 @Composable
 private fun MyApp(names: List<String> = listOf("World","Compose")) {
-    Column {
+    Column(modifier = Modifier.padding(vertical = 4.dp)) {
         for (name in names){
             Greeting(name = name)
         }
