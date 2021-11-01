@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -62,11 +64,15 @@ fun Greeting(name: String) {
 }
 
 @Composable
-private fun Greetings(names: List<String> = listOf("World", "Compose")) {
-    Column(modifier = Modifier.padding(vertical = 4.dp)) {
-        for (name in names) {
-            Greeting(name = name)
-        }
+private fun Greetings(names: List<String> = List(1000){"$it"}) {
+    LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
+
+            items(names){
+                name -> Greeting(name = name)
+
+            }
+
+
     }
 }
 
@@ -81,7 +87,7 @@ fun MyApp() {
     } else {
         Greetings()
     }
-    Greetings()
+
 }
 
 @Preview(showBackground = true, widthDp = 320)
@@ -105,7 +111,7 @@ fun OnBoardingScreen(onContinueClicked: () -> Unit) {
         ) {
             Text(text = "Welcome to the Basics Codelab!")
             Button(
-                onClick = { onContinueClicked },
+                onClick =  onContinueClicked ,
                 modifier = Modifier.padding(vertical = 24.dp)
             ) {
                 Text(text = "Continue")
