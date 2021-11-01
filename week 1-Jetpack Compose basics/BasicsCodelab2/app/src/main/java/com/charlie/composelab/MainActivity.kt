@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import com.charlie.composelab.ui.theme.ComposeLabTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
@@ -64,13 +65,13 @@ fun Greeting(name: String) {
 }
 
 @Composable
-private fun Greetings(names: List<String> = List(1000){"$it"}) {
+private fun Greetings(names: List<String> = List(1000) { "$it" }) {
     LazyColumn(modifier = Modifier.padding(vertical = 4.dp)) {
 
-            items(names){
-                name -> Greeting(name = name)
+        items(names) { name ->
+            Greeting(name = name)
 
-            }
+        }
 
 
     }
@@ -78,7 +79,7 @@ private fun Greetings(names: List<String> = List(1000){"$it"}) {
 
 @Composable
 fun MyApp() {
-    var shouldShowOnBoarding by remember { mutableStateOf(true) }
+    var shouldShowOnBoarding by rememberSaveable { mutableStateOf(true) }
 
     if (shouldShowOnBoarding) {
         OnBoardingScreen {
@@ -111,7 +112,7 @@ fun OnBoardingScreen(onContinueClicked: () -> Unit) {
         ) {
             Text(text = "Welcome to the Basics Codelab!")
             Button(
-                onClick =  onContinueClicked ,
+                onClick = onContinueClicked,
                 modifier = Modifier.padding(vertical = 24.dp)
             ) {
                 Text(text = "Continue")
