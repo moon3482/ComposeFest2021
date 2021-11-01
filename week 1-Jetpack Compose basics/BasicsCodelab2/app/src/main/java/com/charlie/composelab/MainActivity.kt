@@ -48,7 +48,7 @@ private fun MyApp(names: List<String> = listOf("World","Compose")) {
     }
 }
 
-@Preview(showBackground = true, name = "Text preview")
+@Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
     ComposeLabTheme {
