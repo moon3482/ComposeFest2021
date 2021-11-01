@@ -104,5 +104,7 @@ fun OnBoardingScreen() {
 @Preview(showBackground = true,widthDp = 320,heightDp = 320)
 @Composable
 fun OnBoardingPreview(){
-
+        ComposeLabTheme{
+            OnBoardingScreen()
+        }
 }
