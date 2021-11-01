@@ -37,6 +37,7 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String) {
 
     val expanded = remember { mutableStateOf(false) }
+    val extraPadding = if (expanded.value) 48.dp else 0.dp
 
 
     Surface(
@@ -45,7 +46,10 @@ fun Greeting(name: String) {
     ) {
         Row(modifier = Modifier.padding(24.dp)) {
             Column(
-                modifier = Modifier.weight(1f)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(bottom = extraPadding)
+
             ) {
 
                 Text(text = "Hello, ")
