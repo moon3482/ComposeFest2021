@@ -1,25 +1,20 @@
 package com.charlie.composelab
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import com.charlie.composelab.ui.theme.ComposeLabTheme
+import androidx.compose.ui.Alignment
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,4 +76,33 @@ fun DefaultPreview() {
     ComposeLabTheme {
         MyApp()
     }
+
+}
+
+@Composable
+fun OnBoardingScreen() {
+    var shouldShowOnboarding by remember { mutableStateOf(true) }
+
+    Surface {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "Welcome to the Basics Codelab!")
+            Button(
+                onClick = { shouldShowOnboarding = false },
+                modifier = Modifier.padding(vertical = 24.dp)
+            ) {
+                Text(text = "Continue")
+            }
+        }
+
+    }
+}
+
+@Preview(showBackground = true,widthDp = 320,heightDp = 320)
+@Composable
+fun OnBoardingPreview(){
+
 }
