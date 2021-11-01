@@ -1,6 +1,7 @@
 package com.charlie.composelab
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -11,6 +12,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.material.Button
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +35,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
+
+    val expanded = remember { mutableStateOf(false) }
+
+
     Surface(
         color = MaterialTheme.colors.primary,
         modifier = Modifier.padding(vertical = 4.dp, horizontal = 8.dp)
@@ -45,8 +52,9 @@ fun Greeting(name: String) {
                 Text(text = name)
 
             }
-            OutlinedButton(onClick = { /*TODO*/ }) {
-                Text("Show more")
+            OutlinedButton(onClick = { expanded.value = !expanded.value }) {
+                Text(if (expanded.value) "Show less" else "Show more")
+
             }
         }
 
