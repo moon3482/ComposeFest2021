@@ -1,8 +1,5 @@
 package com.charlie.week2_1compose
 
-import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -22,31 +19,44 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.charlie.week2_1compose.ui.theme.Week21ComposeTheme
 
-class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            Week21ComposeTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
-Greeting(name = "Android")
-                    PhotographerCard()
-                }
+
+@Composable
+fun PhotographerCard(modifier: Modifier = Modifier) {
+    Row(
+        modifier
+            .padding(8.dp)
+            .clip(RoundedCornerShape(4.dp))
+            .background(MaterialTheme.colors.surface)
+            .clickable { }
+            .padding(16.dp)
+    ) {
+        Surface(
+            modifier = Modifier.size(50.dp),
+            shape = CircleShape,
+            color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f)
+        ) {
+
+        }
+
+        Column(
+            modifier = Modifier
+                .padding(start = 8.dp)
+                .align(Alignment.CenterVertically)
+        ) {
+            Text("Alfred Sisley", fontWeight = FontWeight.Bold)
+            CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                Text("3 minutes ago", style = MaterialTheme.typography.body2)
             }
         }
+
     }
+
 }
 
+@Preview
 @Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
+fun PhotographerCardPreview() {
     Week21ComposeTheme {
-        Greeting("Android")
+        PhotographerCard()
     }
 }
-
