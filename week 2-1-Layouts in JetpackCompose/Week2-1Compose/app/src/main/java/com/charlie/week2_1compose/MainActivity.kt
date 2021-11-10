@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
@@ -56,7 +58,12 @@ fun LayoutsCodeLab() {
     Scaffold(topBar = {
         TopAppBar(title = {
             Text(text = "LayoutsCodeLab")
-        }
+        },
+            actions = {
+                IconButton(onClick = { /*TODO*/ }) {
+                    Icon(Icons.Filled.Favorite, contentDescription = null)
+                }
+            }
         )
 
     }
