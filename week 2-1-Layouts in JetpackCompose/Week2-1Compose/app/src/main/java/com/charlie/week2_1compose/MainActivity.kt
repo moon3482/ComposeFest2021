@@ -76,7 +76,7 @@ fun LayoutsCodeLab() {
 
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.padding(8.dp)) {
         Text(text = "Hi there!")
         Text(text = "Thanks for going through the Layouts CodeLab")
     }
