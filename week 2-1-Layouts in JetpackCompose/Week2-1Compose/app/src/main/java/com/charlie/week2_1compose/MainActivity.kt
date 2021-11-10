@@ -54,7 +54,11 @@ fun DefaultPreview() {
 @Composable
 fun LayoutsCodeLab() {
     Scaffold(topBar = {
-        Text(text = "LayoutsCodeLab", style = MaterialTheme.typography.h3)
+        TopAppBar(title = {
+            Text(text = "LayoutsCodeLab")
+        }
+        )
+
     }
     ) { innerPadding ->
         BodyContent(Modifier.padding(innerPadding))
