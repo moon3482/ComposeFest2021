@@ -29,8 +29,9 @@ class MainActivity : ComponentActivity() {
             Week21ComposeTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
-Greeting(name = "Android")
-                    PhotographerCard()
+//                    Greeting(name = "Android")
+//                    PhotographerCard()
+                    LayoutsCodeLab()
                 }
             }
         }
@@ -49,4 +50,31 @@ fun DefaultPreview() {
         Greeting("Android")
     }
 }
+
+@Composable
+fun LayoutsCodeLab() {
+    Scaffold { innerPadding ->
+        BodyContent(Modifier.padding(innerPadding))
+
+    }
+
+}
+
+@Composable
+fun BodyContent(modifier: Modifier = Modifier) {
+    Column(modifier = modifier) {
+        Text(text = "Hi there!")
+        Text(text = "Thanks for going through the Layouts CodeLab")
+    }
+}
+
+@Preview
+@Composable
+fun LayoutsCodeLabPreView() {
+    Week21ComposeTheme {
+        LayoutsCodeLab()
+    }
+}
+
+
 
