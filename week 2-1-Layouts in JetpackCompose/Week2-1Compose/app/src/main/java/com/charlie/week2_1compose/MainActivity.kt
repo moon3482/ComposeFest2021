@@ -30,11 +30,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             Week21ComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(color = MaterialTheme.colors.background) {
+
 //                    Greeting(name = "Android")
 //                    PhotographerCard()
-                    LayoutsCodeLab()
-                }
+                    ScrollingList()
+
             }
         }
     }
