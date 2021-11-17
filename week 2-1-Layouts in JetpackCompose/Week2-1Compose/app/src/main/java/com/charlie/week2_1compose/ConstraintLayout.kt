@@ -24,6 +24,7 @@ fun ConstraintLayoutContent() {
         }
         Text(text = "Text", modifier = Modifier.constrainAs(text) {
             top.linkTo(button.bottom, margin = 16.dp)
+            centerHorizontallyTo(parent)
         })
     }
 }
