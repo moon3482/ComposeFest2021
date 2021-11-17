@@ -5,10 +5,12 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -33,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
 //                    Greeting(name = "Android")
 //                    PhotographerCard()
-                    ScrollingList()
+                LayoutsCodeLab()
 
             }
         }
@@ -76,13 +78,17 @@ fun LayoutsCodeLab() {
 
 @Composable
 fun BodyContent(modifier: Modifier = Modifier) {
-    MyOwnColumn(modifier.padding(8.dp)) {
-        Text("MyOwnColumn")
-        Text("places items")
-        Text("vertically.")
-        Text("We've done it by hand!")
+    Row(modifier = modifier.horizontalScroll(rememberScrollState())) {
+        StaggeredGrid {
+            for (topic in topics) {
+                Chip(modifier = Modifier.padding(8.dp), text = topic)
+            }
+        }
     }
-}
+    }
+
+
+
 @Preview
 @Composable
 fun LayoutsCodeLabPreView() {
@@ -90,6 +96,27 @@ fun LayoutsCodeLabPreView() {
         LayoutsCodeLab()
     }
 }
+
+val topics = listOf(
+    "MyLove",
+    "I'll Give you",
+    "Something",
+    "Time",
+    "Flower",
+    "Favorite",
+    "We Time",
+    "Never",
+    "In your Hans",
+    "무야호",
+    "무냐고",
+    "아이고난",
+    "하더놈",
+    "김성근",
+    "감독님",
+    "사랑해",
+    "예이예이예이"
+)
+
 
 
 
