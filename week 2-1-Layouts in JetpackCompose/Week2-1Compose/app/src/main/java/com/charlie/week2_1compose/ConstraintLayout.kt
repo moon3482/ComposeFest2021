@@ -83,7 +83,7 @@ fun DecoupledConstraintLayout() {
 
 @Composable
 fun TwoTexts(modifier: Modifier = Modifier, text1: String, text2: String) {
-    Row(modifier = modifier) {
+    Row(modifier = modifier.height(IntrinsicSize.Min)) {
         Text(
             text = text1,
             modifier = Modifier
