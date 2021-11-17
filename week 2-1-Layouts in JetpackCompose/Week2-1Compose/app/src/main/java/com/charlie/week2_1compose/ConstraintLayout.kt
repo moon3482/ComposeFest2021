@@ -1,12 +1,17 @@
 package com.charlie.week2_1compose
 
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.layout
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.atLeast
 import com.charlie.week2_1compose.ui.theme.Week21ComposeTheme
@@ -48,8 +53,43 @@ fun LargeConstraintLayout() {
             text = "This is a very very very very very very very long text",
             Modifier.constrainAs(text) {
                 linkTo(start = guideline, end = parent.end)
-                width = Dimension.preferredWrapContent.atLeast(100.dp)
+                width = Dimension.preferredWrapContent
+                    .atLeast(100.dp)
             })
+    }
+}
+
+@Composable
+fun DecoupledConstraintLayout() {
+    BoxWithConstraints {
+        val constraints = if (maxWidth < maxHeight) {
+            decoupledConstraints(margin = 16.dp)
+        } else {
+            decoupledConstraints(margin = 32.dp)
+        }
+        ConstraintLayout(constraintSet = constraints) {
+            Button(onClick = { /*TODO*/ }, modifier = Modifier.layoutId("button")) {
+                Text(text = "Button")
+            }
+            Text(text = "Text", modifier = Modifier.layoutId("text"))
+        }
+    }
+
+
+}
+
+private fun decoupledConstraints(margin: Dp): ConstraintSet {
+    return ConstraintSet {
+        val button = createRefFor("button")
+        val text = createRefFor("text")
+
+        constrain(button) {
+            top.linkTo(parent.top, margin = margin)
+        }
+
+        constrain(text) {
+            top.linkTo(parent.bottom, margin = margin)
+        }
     }
 }
 
