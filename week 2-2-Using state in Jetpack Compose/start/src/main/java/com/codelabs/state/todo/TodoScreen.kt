@@ -54,27 +54,9 @@ fun TodoScreen(
     onRemoveItem: (TodoItem) -> Unit
 ) {
     Column {
-        LazyColumn(
-            modifier = Modifier.weight(1f),
-            contentPadding = PaddingValues(top = 8.dp)
-        ) {
-            items(items = items) {
-                TodoRow(
-                    todo = it,
-                    onItemClicked = { onRemoveItem(it) },
-                    modifier = Modifier.fillParentMaxWidth()
-                )
-            }
-        }
+        TodoItemInputBackground(elevate = true, modifier = Modifier.fillMaxWidth()) {
+            TodoItemInput(onItemComplete = onAddItem)
 
-        // For quick testing, a random item generator button
-        Button(
-            onClick = { onAddItem(generateRandomTodoItem()) },
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-        ) {
-            Text("Add random item")
         }
     }
 }
@@ -126,13 +108,16 @@ fun PreviewTodoScreen() {
 }
 
 @Composable
-fun TodoInputTextField(modifier: Modifier) {
-    val (text, setText) = remember { mutableStateOf("") }
-    TodoInputText(text = text, onTextChange = setText, modifier = modifier)
+fun TodoInputTextField(text: String, onTextChange: (String) -> Unit, modifier: Modifier) {
+
+    TodoInputText(text = text, onTextChange = onTextChange, modifier = modifier)
 }
 
 @Composable
 fun TodoItemInput(onItemComplete: (TodoItem) -> Unit) {
+    val (text, setText) = remember {
+        mutableStateOf("")
+    }
     Column {
         Row(
             Modifier
@@ -140,9 +125,11 @@ fun TodoItemInput(onItemComplete: (TodoItem) -> Unit) {
                 .padding(top = 16.dp)
         ) {
             TodoInputTextField(
+                text = text,
                 modifier = Modifier
                     .weight(1f)
-                    .padding(end = 8.dp)
+                    .padding(end = 8.dp),
+                onTextChange = setText
             )
             TodoEditButton(
                 onClick = { /*TODO*/ },
@@ -153,6 +140,10 @@ fun TodoItemInput(onItemComplete: (TodoItem) -> Unit) {
         }
     }
 }
+
+@Preview
+@Composable
+fun PreviewTodoItemInput() = TodoItemInput(onItemComplete = {})
 
 @Preview
 @Composable
