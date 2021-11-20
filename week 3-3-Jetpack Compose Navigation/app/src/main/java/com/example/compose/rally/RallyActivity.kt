@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
 import com.example.compose.rally.ui.components.RallyTabRow
 import com.example.compose.rally.ui.theme.RallyTheme
 
@@ -49,6 +50,7 @@ fun RallyApp() {
     RallyTheme {
         val allScreens = RallyScreen.values().toList()
         var currentScreen by rememberSaveable { mutableStateOf(RallyScreen.Overview) }
+        val navController = rememberNavController()
         Scaffold(
             topBar = {
                 RallyTabRow(
