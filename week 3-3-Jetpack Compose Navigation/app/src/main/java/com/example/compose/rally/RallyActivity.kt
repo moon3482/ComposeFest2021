@@ -29,14 +29,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.NavType
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navArgument
 import com.example.compose.rally.data.Account
 import com.example.compose.rally.data.UserData
 import com.example.compose.rally.ui.accounts.AccountsBody
@@ -81,10 +78,16 @@ fun RallyApp() {
                 modifier = Modifier.padding(innerPadding)
             ) {
                 val accountsName = RallyScreen.Accounts.name
-                composable(route = "$accountsName/{name}", arguments = listOf(navArgument("name") {
-                    type =
-                        NavType.StringType
-                })) { entry ->
+                composable(
+                    route = "$accountsName/{name}",
+                    arguments = listOf(navArgument("name") {
+                        type =
+                            NavType.StringType
+                    }),
+                    deepLinks =  listOf(navDeepLink {
+                        uriPattern = "rally://$accountsName/{name}"
+                    })
+                ) { entry ->
                     val accountName = entry.arguments?.getString("name")
                     val account = UserData.getAccount(accountName)
                     SingleAccountBody(account = account)
